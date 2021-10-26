@@ -1,0 +1,27 @@
+<div class="container-fluid">
+
+    <% if @idea.errors.any? %>
+            <% @idea.errors.full_messages.each do |msg|%>
+                <div class="alert alert-warning font-s" role="alert"> 
+                    <%= msg %>
+                </div>
+            <% end%>
+    <% end%>
+
+    <%= form_with(model: @idea) do |form|%>
+
+    <div>
+        <%= form.label :title, class:"font"%>
+        <br>
+        <%= form.text_field :title, class:"form-control font-s"%>
+    </div>
+    <br>
+    <div>
+        <%= form.label :description, class:"font"%>
+        <br>
+        <%= form.text_area :description, class:"form-control font-s" %>
+    </div>
+    <br>
+    <%= form.submit :'Create Idea', class: 'btn btn-outline-info font-s' %>  
+<% end%>
+</div>

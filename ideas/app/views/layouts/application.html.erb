@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ideas</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <body>
+
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <ul class="nav">
+      <a href="/" class="nav-link ml heading text-info">Idea Factory</a>
+    </ul>
+    <ul class="nav">
+    <li><a href="/ideas/new" class="nav-link mr font text-info">Create new Idea</a></li>
+    
+  <% if user_signed_in? %>
+      <li class= "nav-link text-dark font">
+        Hello! <%= current_user.full_name%>
+      </li>
+        <li><%= link_to "Logout", session_path, class: 'nav-link mr font text-info', method: :delete, data: {confirm: "Are you sure you want to logout?"} %></li>
+        <% else %>
+        <li><%=  link_to  'Log in', new_session_path, class: 'nav-link mr font text-info'  %></li>
+        <li><%=  link_to  'Sign Up', new_user_path, class: 'nav-link mr font text-info' %></li>
+      <% end %>
+    </ul>
+</nav>
+
+  <% if flash[:notice].present?%>
+    <div class="alert alert-success alert-dismissible fade show font-s" role="alert">
+      <%= flash[:notice]%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">
+            &times;
+          </span>
+          </button>
+        </div>
+        
+    <% elsif flash[:alert].present?%>
+      <div class="alert alert-danger alert-dismissible fade show font-s" role="alert">
+          <%= flash[:alert]%>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">
+            &times;
+          </span>
+          </button>
+      </div>
+
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
