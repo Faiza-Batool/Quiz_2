@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <br>
+    <h4 class= "example font-family text-dark">
+        <%= @idea.title%>
+   </h4>
+    
+    <p class= "example font text-dark"> 
+        <%= @idea.description%>
+    </p>
+
+    <p  class="font-s text-secondary">
+    Posted <%= time_ago_in_words(@idea.created_at) %> ago
+    </p>
+
+     <p  class="font-s text-secondary">
+    Created by: <%= @idea.user.full_name %>
+    </p>
+
+    <% if can?(:crud, @idea)%>
+        <%= link_to "Edit", edit_idea_path(@idea.id) ,:class => 'btn btn-outline-info font-s' %>
+        <%= link_to "Delete", idea_path(@idea.id), :class => 'btn btn-outline-info font-s', method: :delete, data:{confirm:"Are you sure?"} %>
+    <% end %>
+
+<%= form_with(model:[@idea, @review]) do |f|%>
+        <div>
+        <br>
+            <h5 class="font"><%= f.label :Review %></h5>
+            <%= f.text_area :body, class:"form-control font-s", :placeholder => "what's on your mind?" %>
+        </div>
+        <br>
+        <%= f.submit :Submit, class:'btn btn-outline-info font-s'%>
+    <% end %>
+    <br>
+
+    <% if @review.errors.any? %>
+        <% @review.errors.full_messages.each do |msg| %>
+            <div class="alert alert-warning font-s" role="alert">    
+                <%= msg%>
+            </div>
+        <% end%>
+    <% end%>
+    
+    <% @reviews.each do |review| %>
+        <div class= "example font text-dark">
+        <%= review.body%>
+        </div>
+
+        <p class="font-s text-secondary">
+        Posted <%= time_ago_in_words(review.created_at) %> ago
+        |
+        Created by: <%= review.user.full_name %>
+        |
+        <% if can?(:crud, review)%>
+            <%= link_to "Delete", idea_review_path(@idea.id, review.id), class: 'badge badge-info font-xs ', method: :delete, data:{confirm: "Are you sure?"}  %>
+        <% end %>
+
+        
+        </p>
+
+    <% end %>
+    <hr>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <h3 class = "heading bold">Sign Up</h3>
+
+    <%= form_with model: @user do |form| %>
+        <% if @user.errors.any?%>
+            <div class="alert alert-warning font-s" role="alert"> 
+                <p><%= @user.errors.full_messages.join(', ')%></p>
+            </div>
+        <% end%>
+        <div>
+            <%= form.label :first_name, class:"font-s"%>
+            <%= form.text_field :first_name, class:"form-control font-s"%>
+        </div>
+        <div>
+            <%= form.label :last_name, class:"font-s"%>
+            <%= form.text_field :last_name, class:"form-control font-s"%>
+        </div>
+        <div>
+            <%= form.label :email, class:"font-s"%>
+            <%= form.text_field :email, class:"form-control font-s"%>
+        </div>
+        <div>
+            <%= form.label :password, class:"font-s"%>
+            <%= form.text_field :password, class:"form-control font-s" , type:"password"%>
+        </div>
+        <div>
+            <%= form.label :password_confirmation, class:"font-s"%>
+            <%= form.text_field :password_confirmation, class:"form-control font-s", type:"password"%>
+        </div>
+        <br>
+        <%= form.submit "Sign Up", class: 'btn btn-outline-info font-s'%>
+    <% end %>

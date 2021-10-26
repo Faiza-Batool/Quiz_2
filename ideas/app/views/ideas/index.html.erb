@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <ul class="list-group list-group-flush">
+    <br>
+        <% @ideas.each do |idea|%>
+            
+            <li class="list-group-item"
+              
+                <h3 class=" heading" >
+                    <%= link_to idea.title, idea_path(idea.id), :class => " card-title font-family font-weight-bold text-info" %>
+                </h3>
+                <div class=" body font text-dark">
+                    <%= idea.description%>
+                </div>
+                <br>
+                
+                    <div class = "row ">
+                     
+                    <% if can?(:like, idea)%>
+
+                        <% like = idea.likes.find_by(user: current_user) %>
+                        <% if like.present? %>
+                             
+                            <div class = "col ">
+                                <%= link_to "Liked", like_path(like),method: :delete,:class => "btn btn-outline-info font-s"  %>
+                               
+                            </div>
+                            <p  class="col font-s text-secondary">
+                                    liked by: <%= like.user.full_name %>
+                            </p>
+                        
+                        <% else %>
+                            <div class = "col ">
+                                <%= link_to "Like", idea_likes_path(idea),method: :post,:class => " btn btn-outline-info font-s"  %>
+                            </div>
+                        <% end %>
+                        
+                        <div class = "col-auto text-dark font-s">
+                            <div>Likes: <%= idea.likes.count %></div>
+                        </div>
+                        
+                    <% end %>
+                    </div>
+
+            </li>
+            <br>
+        <% end %>
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+  

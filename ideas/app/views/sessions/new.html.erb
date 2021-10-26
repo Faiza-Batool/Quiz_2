@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <h3
+     class = "heading bold">Sign In</h3>
+
+    <%= form_with url:session_path do |form| %>
+    <div>
+        <%= form.label :email, class:"font-s"%>
+        <%= form.text_field :email, class:"form-control font-s"%>
+    </div>
+    <div>
+        <%= form.label :password, class:"font-s"%>
+        <%= form.text_field :password, class:"form-control font-s", type:"password"%>
+    </div>
+    <br>
+    <%= form.submit "Sign In", class: 'btn btn-outline-info font-s'%>
+    <% end %>
